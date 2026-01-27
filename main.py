@@ -12,6 +12,8 @@ app.add_middleware(
 )
 
 app.include_router(router)
+
+# Required for Render / production
 import uvicorn
 
 if __name__ == "__main__":
