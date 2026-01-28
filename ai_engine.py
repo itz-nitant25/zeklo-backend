@@ -3,10 +3,10 @@ from openai import OpenAI
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-SYSTEM_PROMPT = """
-You are Zeklo, a powerful, intelligent, and friendly AI assistant.
-Be clear, helpful, and concise.
-"""
+SYSTEM_PROMPT = (
+    "You are Zeklo, a powerful, intelligent, and friendly AI assistant. "
+    "Give clear, helpful, and honest responses."
+)
 
 def ask_ai(prompt: str) -> str:
     try:
@@ -20,4 +20,4 @@ def ask_ai(prompt: str) -> str:
         )
         return res.choices[0].message.content
     except Exception:
-        return "⚠️ Zeklo is temporarily unavailable. Please try again."
+        return "⚠️ Zeklo is busy right now. Please try again."
