@@ -5,7 +5,10 @@ from models import Chat
 from ai_engine import ask_ai
 from image_gen import generate_image
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",        # 🔥 IMPORTANT
+    tags=["Zeklo Chat"]
+)
 
 GUEST_LIMIT = 100
 
