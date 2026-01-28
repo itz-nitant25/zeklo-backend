@@ -19,4 +19,3 @@ def ask_ai(prompt: str) -> str:
     )
 
     return response.choices[0].message.content
-
