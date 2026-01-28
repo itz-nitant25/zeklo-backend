@@ -1,23 +1,22 @@
 import os
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-SYSTEM_PROMPT = (
-    "You are Zeklo, a powerful, intelligent, and friendly AI assistant. "
-    "Give clear, helpful, and honest responses."
-)
+def get_client():
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY not set")
+    return OpenAI(api_key=api_key)
 
 def ask_ai(prompt: str) -> str:
-    try:
-        res = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        return res.choices[0].message.content
-    except Exception:
-        return "⚠️ Zeklo is busy right now. Please try again."
+    client = get_client()
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are Zeklo, an intelligent assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    return response.choices[0].message.content
+
